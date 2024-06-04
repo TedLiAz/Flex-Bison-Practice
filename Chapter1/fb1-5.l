@@ -14,8 +14,8 @@
 [0-9]+ { yylval = atoi(yytext); return NUMBER;       }
 \n     { return EOL;                                 }
 [ \t]  { /*ignore whitespace*/                       }
-.      { printf("Mystery character %c\n" , *yytext); }
 "("    { return OP; }
 ")"    { return CP; }
 "//".* { /* ignore comments */ } 
+.      { printf("Mystery character %c\n" , *yytext); }
 %%
