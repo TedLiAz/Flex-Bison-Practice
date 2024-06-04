@@ -1,4 +1,7 @@
-/* English -> American */
+/* 
+fb1-2.l: English to American
+English -> American 
+*/
 %{
 #include <stdio.h>
 %}
