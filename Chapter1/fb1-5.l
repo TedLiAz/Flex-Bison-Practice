@@ -15,13 +15,7 @@
 \n     { return EOL;                                 }
 [ \t]  { /*ignore whitespace*/                       }
 .      { printf("Mystery character %c\n" , *yytext); }
+"("    { return OP; }
+")"    { return CP; }
+"//".* { /* ignore comments */ } 
 %%
-
-main(int argc, char** argv) {
-    int tok;
-    while( tok = yylex() ){
-        printf("%d",tok);
-        if(tok == NUMBER) printf(" = %d\n",yylval);
-        else printf("\n");
-    }
-}

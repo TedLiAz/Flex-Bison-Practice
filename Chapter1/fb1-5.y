@@ -7,30 +7,37 @@ simplest version of calculator */
 
 /* declare tokens */
 %token NUMBER
-%token ADD SUB MUL DIV ABS
+%token ADD SUB MUL DIV ABS OP CP
 %token EOL
 
 %%
 calclist: /*Nothing*/ 
-        | calclist exp EOL { printf("= %d\n", $1); } 
+        | calclist exp EOL { printf("= %d\n", $2); } 
+        ;
 
 exp: factor /*By default: $$ = $1*/
    | exp ADD factor { $$ = $1 + $3; } 
    | exp SUB factor { $$ = $1 - $3; } 
+   ;
 
 factor: term
       | factor MUL term { $$ = $1 * $3; }
       | factor DIV term { $$ = $1 / $3; } 
-term: NUMBER
-    | ABS term { $$ = $2 >= 0 ? $2 : - $2; }
+      ;
+
+term: NUMBER   
+    | ABS term  { $$ = $2 >= 0 ? $2 : - $2; }
+    | OP exp CP { $$ = $2;                  }
+    ;
 %%
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     yyparse();
+    return 0;
 }
 
-yyerror(char *s)
+void yyerror(char *s)
 {
     fprintf(stderr, "error: %s\n",s);
 }
