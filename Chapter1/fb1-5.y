@@ -8,11 +8,12 @@ simplest version of calculator */
 /* declare tokens */
 %token NUMBER
 %token ADD SUB MUL DIV ABS OP CP
-%token EOL
+%token EOL COMMAND
 
 %%
 calclist: /*Nothing*/ 
-        | calclist exp EOL { printf("= %d\n", $2); } 
+        | calclist exp EOL { printf("= %d\n", $2); }
+        | calclist EOL     { /*Do nothing*/        }
         ;
 
 exp: factor /*By default: $$ = $1*/
